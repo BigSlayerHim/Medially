@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Appointment Booking</title>
+  <style>
+    /* Background styling */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 85%;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('bg.jpeg'); /* Using your uploaded image as background */
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* Container for form */
+    .appointment-container {
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+      width: 600px;
+      text-align: center;
+    }
+
+    /* Header styling */
+    .appointment-container h2 {
+      color: #333;
+      font-size: 22px; /* Decreased font size */
+      margin-bottom: 5px;
+    }
+
+    /* Subtext description */
+    .appointment-container p {
+      color: #666;
+      font-size: 12px; /* Decreased font size */
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    /* Input and select styling */
+    .appointment-container label {
+      color: #555;
+      font-size: 12px; /* Decreased font size */
+      display: block;
+      margin-top: 10px;
+      text-align: left;
+    }
+
+    .appointment-container input,
+    .appointment-container select,
+    .appointment-container textarea {
+      width: 100%;
+      padding: 8px; /* Adjusted padding */
+      margin: 8px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 14px; /* Decreased font size */
+      box-sizing: border-box;
+    }
+
+    /* Button styling */
+    .appointment-container button {
+      width: 50%;
+      padding: 10px; /* Adjusted padding */
+      background-color: blue;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px; /* Decreased font size */
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .appointment-container button:hover {
+      background-color: #218838;
+    }
+
+    /* Success message styling */
+    .success-message {
+      display: none;
+      color: #28a745;
+      font-size: 14px; /* Decreased font size */
+      font-weight: bold;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="appointment-container">
+    <h2>Book Your Appointment</h2>
+    <p>Please fill in the form below to book your appointment and provide details about your symptoms.</p>
+
+    <form id="appointmentForm" onsubmit="return validateForm()">
+      <label for="name">Patient Name:</label>
+      <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Enter your email address" required>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+
+      <label for="date">Appointment Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <label for="doctor">Choose Doctor:</label>
+      <select id="doctor" name="doctor" required>
+        <option value="">Select Doctor</option>
+        <option value="Dr. Anshi">Dr. Anshi</option>
+        <option value="Dr. Himanshu">Dr. Himanshu</option>
+        <option value="Dr. Inder">Dr. Inder</option>
+        <option value="Dr. Deepanshu">Dr. Deepanshu</option>
+      </select>
+
+      <label for="symptoms">Symptoms:</label>
+      <textarea id="symptoms" name="symptoms" rows="3" placeholder="Describe your symptoms" required></textarea>
+
+      <label for="illnessType">Type of Illness:</label>
+      <select id="illnessType" name="illnessType" required>
+        <option value="">Select Illness Type</option>
+        <option value="General Check-up">General Check-up</option>
+        <option value="Flu/Cold">Flu/Cold</option>
+        <option value="Chronic Condition">Chronic Condition</option>
+        <option value="Injury">Injury</option>
+        <option value="Other">Other</option>
+      </select>
+
+      <label for="notes">Additional Notes:</label>
+      <textarea id="notes" name="notes" rows="3" placeholder="Any other information (optional)"></textarea>
+
+      <button type="submit">Book Appointment</button>
+    </form>
+
+    <p id="successMessage" class="success-message">Your appointment has been successfully booked!</p>
+  </div>
+
+  <script>
+    function validateForm() {
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const phone = document.getElementById("phone").value;
+      const date = document.getElementById("date").value;
+      const doctor = document.getElementById("doctor").value;
+      const symptoms = document.getElementById("symptoms").value;
+      const illnessType = document.getElementById("illnessType").value;
+
+      if (!name || !email || !phone || !date || !doctor || !symptoms || !illnessType) {
+        alert("Please fill in all required fields.");
+        return false;
+      }
+
+      document.getElementById("successMessage").style.display = "block";
+      setTimeout(() => {
+        document.getElementById("successMessage").style.display = "none";
+        document.getElementById("appointmentForm").reset();
+      }, 3000);
+
+      return false; // Prevents actual form submission for demo purposes
+    }
+  </script>
+
+</body>
+</html>
